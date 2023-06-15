@@ -8,7 +8,7 @@
 #include <iostream>
 #include "Integrate.hpp"
 #include "userInput.hpp"
-#include "uncertain.h"
+#include "uxhw.h"
 
 /**
  *	@brief Print robot state to stdout.
@@ -46,29 +46,29 @@ convertTimerInputsToWheelSpeeds(
 	{
 		if(timerInput.at(i) >= maximumTimerCount)
 		{
-			wheelSpeeds.at(i) = libUncertainFloatUniformDist(
+			wheelSpeeds.at(i) = UxHwFloatUniformDist(
 				0.0f,
 				wheelConstant / maximumTimerCount
 			);
 		}
 		else if(timerInput.at(i) <= 0.0f - maximumTimerCount)
 		{
-			wheelSpeeds.at(i) = libUncertainFloatUniformDist(
+			wheelSpeeds.at(i) = UxHwFloatUniformDist(
 				(0.0f - wheelConstant) / maximumTimerCount,
 				0.0f
 			);
 		}
 		else if(timerInput.at(i) < 1.0f && timerInput.at(i) >= 0.0f)
 		{
-			wheelSpeeds.at(i) = libUncertainFloatUniformDist(0.1, 0.5);
+			wheelSpeeds.at(i) = UxHwFloatUniformDist(0.1, 0.5);
 		}
 		else if(timerInput.at(i) > -1.0f && timerInput.at(i) < 0.0f)
 		{
-			wheelSpeeds.at(i) = libUncertainFloatUniformDist(-0.5, -0.1);
+			wheelSpeeds.at(i) = UxHwFloatUniformDist(-0.5, -0.1);
 		}
 		else
 		{
-			float uncertainTimerCount = libUncertainFloatUniformDist(
+			float uncertainTimerCount = UxHwFloatUniformDist(
 				timerInput.at(i) - 0.5f,
 				timerInput.at(i) + 0.5f
 			);
